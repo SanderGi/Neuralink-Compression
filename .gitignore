@@ -6,3 +6,4 @@ test.*
 !test.wav
 *.o
 .DS_Store
+*.dSYM
