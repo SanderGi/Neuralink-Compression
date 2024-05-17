@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+ditto -c -k --sequesterRsrc $1 $2

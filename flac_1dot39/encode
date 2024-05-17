@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+ffmpeg -i $1 $2.flac
+mv $2.flac $2

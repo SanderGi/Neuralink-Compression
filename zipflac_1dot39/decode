@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+(printf "n\nn\n") | (unzip -p $1 > $1.flac 2>&1)
+rm -rf ./__MACOSX 2>&1
+
+ffmpeg -i $1.flac $2.wav
+mv $2.wav $2
+mv $1.flac $1

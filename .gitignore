@@ -1,0 +1,8 @@
+./encode
+./decode
+.vscode
+data.zip
+test.*
+!test.wav
+*.o
+.DS_Store

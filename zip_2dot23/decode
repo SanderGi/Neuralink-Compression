@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+(printf "n\nn\n") | (unzip -p $1 > $2 2>&1)
+rm -rf ./__MACOSX 2>&1

@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+ffmpeg -i $1 $2.flac
+ditto -c -k --sequesterRsrc $2.flac $2

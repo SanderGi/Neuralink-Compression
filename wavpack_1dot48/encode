@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+wavpack $1 -o $2.wv
+mv $2.wv $2
