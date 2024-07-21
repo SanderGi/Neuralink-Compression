@@ -1,8 +1,8 @@
 # Neuralink Compression
 The goal is 200x compression of 5 second uncompressed mono-channel wave files in real time (< 1ms) at low power (< 10mW).
 
-## Current Solution (2.49x compression)
-I noticed that most 5 second clips are sparse and only use a few hundred values from their range (-32768, 32767). This lends itself very well to simple Huffman encoding (which is nice and fast as well). However at the greater ends of the range (512-1019 unique amplitude values) I found it more efficient to simply store an array of unique values and a sequence of indices into that array. This hybrid approach is the current solution.
+## Current Solution (2.89x compression)
+I noticed that most 5 second clips are sparse and only use a few hundred values from their range (-32768, 32767). This lends itself very well to simple Huffman encoding (which is nice and fast as well). However at the greater ends of the range (512-1019 unique amplitude values) I found it more efficient to simply store an array of unique values and a sequence of indices into that array. To reduce the entropy before applying these entropy based approaches, the 1st discrete difference transform is applied before Huffman encoding. This hybrid approach is the current solution.
 
 ## Future Improvements
 1. There are a few bytes to save by compressing the 44 byte wav header (or leaving it out entirely as it is the same for all files). I did not micro-optimize this for these preliminary experiments.
@@ -16,6 +16,7 @@ I noticed that most 5 second clips are sparse and only use a few hundred values 
 1. Various lossles audio codecs (FLAC, OptimFROG, WavPack). These were decent but not as good as zip or the current solution and did not lend themselves to further compression.
 2. Fast Fourier Transform (FFT) and variants (Discrete Cosine Transform, Wavelet Transforms, etc.) with quantization and amplitude thresholding followed by storing the delta to make them exact (lossless). These were too noisy to compress the deltas and lost too much information during quantization/thresholding to be useful.
 3. Various forms of naive compression (run length encoding, delta encoding, etc.) were not effective on the data due to the lack of repeating patterns in most of the files.
+4. n-th difference for n > 1.
 
 ## Build Instructions
 *Tested on MacOS 14.4.1*
